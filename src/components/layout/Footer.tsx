@@ -1,11 +1,32 @@
 
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useCreateNewsletter } from '@/hooks/use-newsletter';
+import { toast } from 'sonner';
 
 export const Footer: React.FC = () => {
+    const [email, setEmail] = useState('');
+    const { mutate: createNewsletter, isPending } = useCreateNewsletter();
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        createNewsletter(
+            { email },
+            {
+                onSuccess: () => {
+                    toast.success('Successfully subscribed to newsletter!');
+                    setEmail('');
+                },
+                onError: (error: { message?: string }) => {
+                    toast.error(error?.message || 'Failed to subscribe. Please try again.');
+                }
+            }
+        );
+    };
+
     return (
         <footer className="bg-[#0A0A0A] text-white pt-32 pb-16 px-10 relative overflow-hidden">
             <div className="max-w-[1800px] mx-auto relative z-10">
@@ -60,13 +81,23 @@ export const Footer: React.FC = () => {
                             <p className="text-[13px] font-light text-neutral-400 max-w-sm mb-10 leading-relaxed">
                                 Get the latest updates, tips, and releases — straight to your inbox.
                             </p>
-                            <form className="flex group border border-white/10 p-1">
+                            <form className="flex group border border-white/10 p-1" onSubmit={handleSubmit}>
                                 <input
                                     type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     placeholder="Email"
                                     className="bg-transparent text-[13px] w-full px-4 focus:outline-none placeholder:text-neutral-700"
+                                    required
+                                    disabled={isPending}
                                 />
-                                <button className="bg-white text-black px-10 py-3 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-200 transition-colors">Submit</button>
+                                <button
+                                    type="submit"
+                                    disabled={isPending}
+                                    className="bg-white text-black px-10 py-3 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-200 transition-colors disabled:bg-neutral-400"
+                                >
+                                    {isPending ? 'Submitting...' : 'Submit'}
+                                </button>
                             </form>
                             <p className="text-[9px] uppercase tracking-[0.3em] text-neutral-600 mt-6 font-bold">
                                 NO SPAM. JUST QUALITY CONTENT AND OCCASIONAL UPDATES.

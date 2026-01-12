@@ -57,11 +57,13 @@ export const blogApi = {
       if (filters.ordering) queryParams.append("ordering", filters.ordering);
       if (filters.author) queryParams.append("author", filters.author);
       if (filters.tags && filters.tags.length > 0) {
-        filters.tags.forEach(tag => queryParams.append("tags", tag));
+        filters.tags.forEach((tag) => queryParams.append("tags", tag));
       }
     }
 
-    const url = `${API_BASE_URL}/api/blogs/${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+    const url = `${API_BASE_URL}/api/blogs/${
+      queryParams.toString() ? `?${queryParams.toString()}` : ""
+    }`;
     const response = await fetch(url, {
       method: "GET",
       headers: createHeaders(),
@@ -159,5 +161,17 @@ export const blogApi = {
     });
 
     await handleApiError(response);
+  },
+
+  getRecentBlogs: async (): Promise<BlogPost[]> => {
+    const API_BASE_URL = siteConfig.apiBaseUrl;
+    const response = await fetch(`${API_BASE_URL}/api/recent-blogs/`, {
+      method: "GET",
+      headers: createHeaders(),
+    });
+
+    await handleApiError(response);
+    const data = await response.json();
+    return data.results || data;
   },
 };

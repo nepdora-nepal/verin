@@ -70,16 +70,16 @@ export function useCreateBlogTag() {
 
   return useMutation({
     mutationFn: (tagData: CreateBlogTag) => blogApi.createTag(tagData),
-    onSuccess: newTag => {
+    onSuccess: (newTag) => {
       // Update the tags query cache with the new tag
-      queryClient.setQueryData<BlogTag[]>(blogKeys.tags(), oldTags => {
+      queryClient.setQueryData<BlogTag[]>(blogKeys.tags(), (oldTags) => {
         return oldTags ? [...oldTags, newTag] : [newTag];
       });
 
       // Alternatively, you can invalidate to refetch
       // queryClient.invalidateQueries({ queryKey: blogKeys.tags() });
     },
-    onError: error => {
+    onError: (error) => {
       console.error("Error creating tag:", error);
     },
   });
@@ -106,7 +106,7 @@ export function useUpdateBlog() {
       slug: string;
       blogData: Omit<UpdateBlogPost, "id">;
     }) => blogApi.update(slug, blogData),
-    onSuccess: updatedBlog => {
+    onSuccess: (updatedBlog) => {
       queryClient.setQueryData(blogKeys.detail(updatedBlog.slug), updatedBlog);
       queryClient.invalidateQueries({ queryKey: blogKeys.lists() });
     },
@@ -120,5 +120,14 @@ export function useDeleteBlog() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: blogKeys.all });
     },
+  });
+}
+
+export function useRecentBlogs() {
+  return useQuery<BlogPost[]>({
+    queryKey: ["recent-blogs"],
+    queryFn: blogApi.getRecentBlogs,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 }
