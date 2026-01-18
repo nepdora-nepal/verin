@@ -1,5 +1,5 @@
-import { tenantName } from "../../tenant.json";
-const TENANT_NAME = tenantName;
+import tenantData from "../../tenant.json";
+const TENANT_NAME = tenantData.tenantName;
 export const siteConfig = {
   name: "Nepdora",
   description: "Nepdora Preview System",
