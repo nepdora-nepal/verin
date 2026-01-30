@@ -19,6 +19,7 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full"
       >
         <ImageWithFallback
+          id="hero"
           src={images.hero}
           fallbackSrc={images.hero}
           fill

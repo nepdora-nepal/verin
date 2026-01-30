@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { useCategories } from "@/hooks/use-category";
 import { getImageUrl } from "@/config/site";
+import Image from "next/image";
 
 export default function CategoryGrid() {
   const { data: categoriesData, isLoading } = useCategories({ page_size: 3 });
@@ -52,9 +53,10 @@ export default function CategoryGrid() {
           >
             <Link href={`/collections?category=${cat.slug}`} className="block">
               <div className="aspect-[3/4.2] overflow-hidden bg-neutral-100 mb-8 relative">
-                <img
+                <Image
                   src={getImageUrl(cat.image || "")}
                   alt={cat.name}
+                  fill
                   className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
                 />
               </div>
