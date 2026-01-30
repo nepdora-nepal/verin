@@ -10,14 +10,33 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, label, value, onChange, ...props }, ref) => {
     const [isFocused, setIsFocused] = React.useState(false);
     const [inputValue, setInputValue] = React.useState(value || "");
+    const internalRef = React.useRef<HTMLInputElement>(null);
+
+    // Merge outer ref with internal ref
+    React.useImperativeHandle(ref, () => internalRef.current!);
 
     // Update internal state when controlled value changes
     React.useEffect(() => {
-      setInputValue(value || "");
+      if (value !== undefined) {
+        setInputValue(value || "");
+      }
     }, [value]);
 
+    // Handle form reset
+    React.useEffect(() => {
+      const form = internalRef.current?.form;
+      if (!form) return;
+
+      const handleReset = () => {
+        setInputValue("");
+      };
+
+      form.addEventListener("reset", handleReset);
+      return () => form.removeEventListener("reset", handleReset);
+    }, []);
+
     // Check if field has value (works for both controlled and uncontrolled)
-    const hasValue = inputValue && inputValue.toString().length > 0;
+    const hasValue = inputValue !== undefined && inputValue !== null && inputValue.toString().length > 0;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
@@ -52,7 +71,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             label && "pt-7",
             className
           )}
-          ref={ref}
+          ref={internalRef}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}

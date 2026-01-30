@@ -50,95 +50,96 @@ export default function ContactSection() {
 
     return (
         <motion.section
-            className="bg-background px-4 py-8 md:px-4 md:py-20 space-y-8 md:space-y-12 relative overflow-hidden"
+            className="bg-background px-6 py-16 md:py-32 space-y-12 relative overflow-hidden min-h-screen"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.2 }}
             variants={fadeInUp}
         >
-            <div className="hidden md:block from-carent-yellow to-yellow-500 pointer-events-none absolute top-80 -left-20 z-50 h-40 w-40 rounded-full bg-linear-to-tr opacity-90 blur-3xl"></div>
-            <div className="hidden md:block from-carent-yellow to-yellow-500 pointer-events-none absolute top-80 -right-20 z-50 h-40 w-40 rounded-full bg-linear-to-tr opacity-90 blur-3xl"></div>
-            {/* Gradients - hidden on mobile */}
-            <div className="max-w-xl mx-auto text-center px-2 relative z-20">
+            {/* Subtle Decorative Elements */}
+            <div className="hidden md:block pointer-events-none absolute top-40 -left-20 z-10 h-64 w-64 rounded-full bg-primary/5 blur-3xl"></div>
+            <div className="hidden md:block pointer-events-none absolute bottom-40 -right-20 z-10 h-64 w-64 rounded-full bg-primary/5 blur-3xl"></div>
 
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-carent-dark">
-                    Contact Verin Tours Today
+            <div className="max-w-2xl mx-auto text-center relative z-20 space-y-8">
+                <div className="inline-block">
+                    <span className="text-[10px] uppercase tracking-[0.4em] text-neutral-400 mb-4 block">Get In Touch</span>
+                    <h1 className="text-4xl md:text-6xl font-serif tracking-tight text-neutral-900 leading-tight">
+                        Connect with VERIN
+                    </h1>
                 </div>
 
+                <p className="text-neutral-500 font-light text-sm md:text-base max-w-lg mx-auto leading-relaxed">
+                    Have a question about our collections or need assistance with an order?
+                    Our relationship team is here to provide exceptional service.
+                </p>
             </div>
-            <div className="max-w-lg mx-auto relative z-20">
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                    {/* NAME FIELDS */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="relative">
-                            <Input
-                                type="text"
-                                name="firstName"
-                                required
-                                placeholder=" "
-                                label="First Name *"
-                                className="peer w-full px-3 sm:px-4 pt-5 sm:pt-6 pb-2 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-background focus:border-carent-yellow outline-none transition"
-                            />
-                        </div>
 
-                        <div className="relative">
-                            <Input
-                                type="text"
-                                name="lastName"
-                                required
-                                placeholder=" "
-                                label="Last Name *"
-                                className="peer w-full px-3 sm:px-4 pt-5 sm:pt-6 pb-2 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-background focus:border-carent-yellow outline-none transition"
-                            />
-                        </div>
+            <div className="max-w-xl mx-auto relative z-20">
+                <form onSubmit={handleSubmit} className="space-y-8 sm:space-y-10">
+                    {/* NAME FIELDS */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
+                        <Input
+                            type="text"
+                            name="firstName"
+                            required
+                            placeholder=" "
+                            label="First Name *"
+                            className="focus:border-primary"
+                        />
+                        <Input
+                            type="text"
+                            name="lastName"
+                            required
+                            placeholder=" "
+                            label="Last Name *"
+                            className="focus:border-primary"
+                        />
                     </div>
 
-                    {/* EMAIL */}
-                    <div className="relative">
+                    {/* EMAIL & PHONE */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
                         <Input
                             type="email"
                             name="email"
                             required
                             placeholder=" "
                             label="Email Address *"
-                            className="peer w-full px-3 sm:px-4 pt-5 sm:pt-6 pb-2 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-background focus:border-carent-yellow outline-none transition"
+                            className="focus:border-primary"
                         />
-                    </div>
-
-                    {/* PHONE */}
-                    <div className="relative">
                         <Input
                             type="tel"
                             name="phone"
                             required
                             label="Phone Number *"
                             placeholder=" "
-                            className="peer w-full px-3 sm:px-4 pt-5 sm:pt-6 pb-2 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-background focus:border-carent-yellow outline-none transition"
+                            className="focus:border-primary"
                         />
                     </div>
 
                     {/* MESSAGE */}
-                    <div className="relative">
+                    <div className="relative group">
                         <textarea
                             name="message"
-                            rows={3}
-                            placeholder="Tell us about your goals"
-                            className="peer w-full text-sm sm:text-base border-2 px-3 sm:px-4 pt-3 border-gray-200 rounded-lg bg-background resize-none focus:border-carent-yellow outline-none transition"
+                            rows={4}
+                            placeholder=" "
+                            className="peer w-full px-4 pt-8 pb-3 text-sm border-2 border-gray-100 rounded-lg bg-white/80 focus:border-primary outline-none transition-all duration-300 resize-none"
                             required
                         />
+                        <label className="text-muted-foreground pointer-events-none absolute left-4 transition-all duration-200 top-2 text-[10px] font-medium peer-placeholder-shown:top-6 peer-placeholder-shown:text-xs">
+                            Tell us about your inquiry *
+                        </label>
                     </div>
 
                     <Button
                         type="submit"
-                        className="rounded-lg w-full h-11 sm:h-12 text-sm sm:text-base text-center justify-center"
                         disabled={isPending}
+                        className="w-full h-16 bg-black text-white hover:bg-neutral-800 rounded-none uppercase tracking-[0.3em] text-[10px] font-bold transition-all duration-500 flex items-center justify-center group"
                     >
-
                         {isPending ? (
                             "Sending..."
                         ) : (
                             <>
-                                Submit Inquiry <Send className="ml-2 w-4 h-4" />
+                                Send Message <Send className="ml-3 w-3 h-3 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
                             </>
                         )}
                     </Button>
