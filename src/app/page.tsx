@@ -5,12 +5,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Hero } from '@/components/home/Hero';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
-import { ProductGrid } from '@/components/product/ProductGrid';
-import { NewsletterModal } from '@/components/home/NewsletterModal';
-import { TestimonialSection } from '@/components/home/TestimonialSection';
 import Link from 'next/link';
 import ImageWithFallback from '@/components/common/ImageWithFallback';
 import { images } from '@/services/image-loader';
+import { NewsletterModal } from '@/components/home/NewsletterModal';
+import { TestimonialSection } from '@/components/home/TestimonialSection';
+import { FeaturedProducts } from '@/components/home/FeaturedProducts';
+import { PopularProducts } from '@/components/home/PopularProducts';
+import { FAQSection } from '@/components/faq/FAQSection';
+import { ContactSection } from '@/components/contact/ContactSection';
 
 const HomePage: React.FC = () => {
   return (
@@ -23,13 +26,7 @@ const HomePage: React.FC = () => {
       <Hero />
       <CategoryGrid />
 
-      <React.Suspense fallback={<div className="h-96" />}>
-        <ProductGrid
-          title="Carried with Intention"
-          subtitle="Soft structures, precise form — bags designed to hold more than what you carry."
-          limit={4}
-        />
-      </React.Suspense>
+      <FeaturedProducts />
 
       {/* Featured Collection Highlight */}
       <section className="h-screen relative overflow-hidden flex items-center justify-center">
@@ -73,6 +70,15 @@ const HomePage: React.FC = () => {
           </div>
         </motion.div>
       </section>
+
+      <PopularProducts />
+
+      <FAQSection />
+
+      <section className="bg-white">
+        <ContactSection />
+      </section>
+
       <TestimonialSection />
 
       <NewsletterModal />

@@ -42,7 +42,7 @@ export const FAQSection: React.FC = () => {
             <Accordion type="single" collapsible className="w-full space-y-4">
                 {faqs?.map((faq: FAQ, idx: number) => (
                     <AccordionItem key={idx} value={`item-${idx}`} className="border-b border-black/10">
-                        <AccordionTrigger className="text-left py-6 text-sm uppercase tracking-[0.2em] font-medium hover:no-underline hover:opacity-50 transition-all">
+                        <AccordionTrigger className="text-left py-6 text-sm  tracking-[0.2em] font-medium hover:no-underline  transition-all">
                             {faq.question}
                         </AccordionTrigger>
                         <AccordionContent className="text-neutral-500 font-light leading-relaxed tracking-wide text-sm pb-8">

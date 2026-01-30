@@ -8,43 +8,51 @@ import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge'; // Assuming you have a Badge component
-import { Star, TrendingUp, Zap } from 'lucide-react';
+import { ShoppingBag, Star, TrendingUp, Zap } from 'lucide-react';
+import { useCart } from '@/hooks/use-cart';
+import { toast } from 'sonner';
+import { Product } from '@/types/product';
 
 interface ProductGridProps {
     title?: string;
     subtitle?: string;
     category?: string;
     limit?: number;
-}
-
-interface Product {
-    id: number;
-    name: string;
-    slug: string;
-    price: string;
-    market_price: string;
-    thumbnail_image: string;
-    category: { id: number; name: string } | null;
-    is_popular: boolean;
-    is_featured: boolean;
-    average_rating: number;
-    reviews_count: number;
-    fast_shipping: boolean;
-    stock: number;
+    isFeatured?: boolean;
+    isPopular?: boolean;
 }
 
 export const ProductGrid: React.FC<ProductGridProps> = ({
     title = "Featured Products",
     subtitle,
     category,
-    limit = 4
+    limit = 4,
+    isFeatured,
+    isPopular
 }) => {
     const { data: productsData, isLoading, error } = useProducts({
         category: category,
         page_size: limit,
+        is_featured: isFeatured,
+        is_popular: isPopular
     });
 
+    const { addToCart } = useCart();
+
     const products: Product[] = productsData?.results || [];
+
+    const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (product.stock === 0) {
+            toast.error("Product is out of stock");
+            return;
+        }
+
+        addToCart(product as any, 1);
+        toast.success(`${product.name} added to cart`);
+    };
 
     const calculateDiscount = (price: string, marketPrice: string): number => {
         const priceNum = parseFloat(price);
@@ -98,7 +106,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                 <Link href={`/product/${product.slug}`} className="block">
                     <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 mb-4">
                         <Image
-                            src={getImageUrl(product.thumbnail_image || '')}
+                            src={getImageUrl(product.thumbnail_image ?? '/placeholder-product.jpg')}
                             alt={product.name}
                             fill
                             className="object-cover transition-all duration-500 group-hover:scale-105"
@@ -135,6 +143,19 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                             </div>
                         )}
 
+                        {/* Add to Cart Overlay */}
+                        {!isOutOfStock && (
+                            <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                <button
+                                    onClick={(e) => handleAddToCart(e, product)}
+                                    className="w-full bg-white text-black py-3 text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors shadow-lg"
+                                >
+                                    <ShoppingBag className="w-4 h-4" />
+                                    Add to Cart
+                                </button>
+                            </div>
+                        )}
+
                         {/* Overlay on hover */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
                     </div>
@@ -165,15 +186,15 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                         </div>
 
                         {/* Rating and reviews */}
-                        {product.average_rating > 0 && (
+                        {product.average_rating && product.average_rating > 0 && (
                             <div className="flex items-center gap-2">
                                 <div className="flex items-center">
                                     {[...Array(5)].map((_, i) => (
                                         <Star
                                             key={i}
-                                            className={`w-4 h-4 ${i < Math.floor(product.average_rating)
-                                                    ? 'text-amber-500 fill-amber-500'
-                                                    : 'text-gray-300'
+                                            className={`w-4 h-4 ${i < Math.floor(product.average_rating || 0)
+                                                ? 'text-amber-500 fill-amber-500'
+                                                : 'text-gray-300'
                                                 }`}
                                         />
                                     ))}
