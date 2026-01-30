@@ -18,7 +18,7 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ slug }) => {
         return (
             <div className="pt-48 pb-32 flex flex-col items-center justify-center min-h-[60vh]">
                 <Loader2 className="w-10 h-10 animate-spin text-neutral-300 mb-4" />
-                <p className="text-neutral-500 font-light tracking-widest uppercase text-[10px]">
+                <p className="text-neutral-500 font-light tracking-widest  text-[10px]">
                     Loading Story...
                 </p>
             </div>
@@ -28,10 +28,10 @@ const NewsDetail: React.FC<NewsDetailProps> = ({ slug }) => {
     if (isError || !blog) {
         return (
             <div className="pt-48 pb-32 flex flex-col items-center justify-center min-h-[60vh]">
-                <h1 className="text-2xl font-serif mb-4">Story not found.</h1>
+                <h1 className="text-2xl  mb-4">Story not found.</h1>
                 <Link
                     href="/news"
-                    className="text-neutral-500 font-light tracking-widest uppercase text-[10px] border-b border-black/10 pb-1 hover:border-black transition-colors"
+                    className="text-neutral-500 font-light tracking-widest  text-[10px] border-b border-black/10 pb-1 hover:border-black transition-colors"
                 >
                     Back to News
                 </Link>

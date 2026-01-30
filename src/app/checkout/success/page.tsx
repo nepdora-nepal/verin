@@ -5,7 +5,7 @@ const SuccessPage = () => {
     return (
         <Suspense fallback={
             <div className="flex items-center justify-center h-screen">
-                <div className="animate-pulse text-lg font-serif">Confirming Order...</div>
+                <div className="animate-pulse text-lg ">Confirming Order...</div>
             </div>
         }>
             <SuccessSection />

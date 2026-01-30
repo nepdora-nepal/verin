@@ -46,10 +46,10 @@ const RecentBlogsSection: React.FC<RecentBlogsSectionProps> = ({
 
     return (
         <div className="max-w-5xl mx-auto px-10 pt-60">
-            <h2 className="text-7xl md:text-8xl font-serif mb-3 tracking-tight leading-[1.1]">
+            <h2 className="text-7xl md:text-8xl  mb-3 tracking-tight leading-[1.1]">
                 Continue Reading
             </h2>
-            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-400 mb-10">
+            <p className="text-[10px]  tracking-[0.2em] font-bold text-neutral-400 mb-10">
                 Discover new perspectives, inspirations, and reflections, a
                 closer look into the world and rhythm of Verin.
             </p>
@@ -73,29 +73,29 @@ const RecentBlogsSection: React.FC<RecentBlogsSectionProps> = ({
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                                 <div className="absolute top-4 left-4">
-                                    <span className="bg-white/90 backdrop-blur-sm px-3 py-1 text-[8px] uppercase tracking-[0.2em] font-bold">
+                                    <span className="bg-white/90 backdrop-blur-sm px-3 py-1 text-[8px]  tracking-[0.2em] font-bold">
                                         {blog.tags?.[0]?.name || 'Story'}
                                     </span>
                                 </div>
                             </div>
                             <div className="space-y-4">
                                 <div className="flex items-center space-x-4">
-                                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-400">
+                                    <span className="text-[10px]  tracking-[0.2em] font-bold text-neutral-400">
                                         {new Date(blog.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                                     </span>
                                     <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-                                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-400">
+                                    <span className="text-[10px]  tracking-[0.2em] font-bold text-neutral-400">
                                         {blog.time_to_read || '5 min'} read
                                     </span>
                                 </div>
-                                <h2 className="text-2xl font-serif group-hover:italic transition-all duration-300 leading-tight">
+                                <h2 className="text-2xl  group-hover:italic transition-all duration-300 leading-tight">
                                     {blog.title}
                                 </h2>
                                 <p className="text-sm text-neutral-500 line-clamp-2 font-light leading-relaxed">
                                     {blog.meta_description}
                                 </p>
                                 <div className="pt-2">
-                                    <span className="text-[10px] uppercase tracking-[0.3em] font-bold border-b border-black/10 pb-1 group-hover:border-black transition-colors">
+                                    <span className="text-[10px]  tracking-[0.3em] font-bold border-b border-black/10 pb-1 group-hover:border-black transition-colors">
                                         Read Story
                                     </span>
                                 </div>

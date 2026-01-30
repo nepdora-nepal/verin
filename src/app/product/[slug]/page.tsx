@@ -29,7 +29,7 @@ const ProductDetailPage: React.FC = () => {
     if (error || !product) {
         return (
             <div className="h-screen flex items-center justify-center">
-                <p className="text-neutral-500 font-serif">The sought-after piece could not be found.</p>
+                <p className="text-neutral-500 ">The sought-after piece could not be found.</p>
             </div>
         );
     }

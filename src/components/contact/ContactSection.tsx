@@ -1,109 +1,149 @@
 "use client";
 
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { useSubmitContactForm } from '@/hooks/use-contact';
-import { Loader2 } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Send } from "lucide-react";
+import { useSubmitContactForm } from "@/hooks/use-contact";
+import { ContactFormData } from "@/types/contact";
+import { motion, Variants } from "framer-motion";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
 
-const contactSchema = z.object({
-    name: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Invalid email address"),
-    phone_number: z.string().min(7, "Phone number must be at least 7 characters").optional().or(z.literal('')),
-    message: z.string().min(10, "Message must be at least 10 characters"),
-});
+const fadeInUp: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: "easeOut" },
+    },
+};
+export default function ContactSection() {
+    const { mutate: submitContact, isPending } = useSubmitContactForm();
 
-type ContactFormValues = z.infer<typeof contactSchema>;
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const formData = new FormData(form);
 
-export const ContactSection: React.FC = () => {
-    const { mutate: submitForm, isPending } = useSubmitContactForm();
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors }
-    } = useForm<ContactFormValues>({
-        resolver: zodResolver(contactSchema),
-    });
+        const firstName = formData.get("firstName") as string;
+        const lastName = formData.get("lastName") as string;
+        const email = formData.get("email") as string;
+        const phone = formData.get("phone") as string;
+        const message = formData.get("message") as string;
 
-    const onSubmit = (data: ContactFormValues) => {
-        submitForm(data, {
+        const submissionData: ContactFormData = {
+            name: `${firstName} ${lastName}`.trim(),
+            email: email,
+            phone_number: phone,
+            message: message,
+        };
+
+        submitContact(submissionData, {
             onSuccess: () => {
-                reset();
-            }
+                toast.success("Message sent successfully");
+                form.reset();
+            },
+            onError: () => {
+                toast.error("Failed to send message");
+            },
         });
     };
 
     return (
-        <div className="pt-48 pb-32 px-10 max-w-2xl mx-auto min-h-screen">
-            <h1 className="text-6xl font-serif mb-16 text-center tracking-tight">We&apos;re Here for You</h1>
-            <form className="space-y-12" onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="space-y-3">
-                        <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400">Name</label>
-                        <input
-                            {...register('name')}
-                            type="text"
-                            className="w-full border-b border-black/10 py-3 focus:outline-none focus:border-black transition-colors bg-transparent text-sm placeholder:text-neutral-300"
-                            placeholder="Your name"
-                        />
-                        {errors.name && <p className="text-red-500 text-[10px] uppercase tracking-wide">{errors.name.message}</p>}
-                    </div>
-                    <div className="space-y-3">
-                        <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400">Email</label>
-                        <input
-                            {...register('email')}
-                            type="email"
-                            className="w-full border-b border-black/10 py-3 focus:outline-none focus:border-black transition-colors bg-transparent text-sm placeholder:text-neutral-300"
-                            placeholder="Email"
-                        />
-                        {errors.email && <p className="text-red-500 text-[10px] uppercase tracking-wide">{errors.email.message}</p>}
-                    </div>
-                </div>
-                <div className="space-y-3">
-                    <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400">Phone Number</label>
-                    <input
-                        {...register('phone_number')}
-                        type="tel"
-                        className="w-full border-b border-black/10 py-3 focus:outline-none focus:border-black transition-colors bg-transparent text-sm placeholder:text-neutral-300"
-                        placeholder="Your phone number (optional)"
-                    />
-                    {errors.phone_number && <p className="text-red-500 text-[10px] uppercase tracking-wide">{errors.phone_number.message}</p>}
-                </div>
-                <div className="space-y-3">
-                    <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400">Message</label>
-                    <textarea
-                        {...register('message')}
-                        rows={4}
-                        className="w-full border-b border-black/10 py-3 focus:outline-none focus:border-black transition-colors bg-transparent resize-none text-sm placeholder:text-neutral-300"
-                        placeholder="Additional notes"
-                    ></textarea>
-                    {errors.message && <p className="text-red-500 text-[10px] uppercase tracking-wide">{errors.message.message}</p>}
-                </div>
-                <button
-                    disabled={isPending}
-                    className="w-full bg-black text-white py-5 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-800 transition-colors mt-8 flex items-center justify-center disabled:bg-neutral-400"
-                >
-                    {isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                    {isPending ? 'Sending...' : 'Send Message'}
-                </button>
-            </form>
+        <motion.section
+            className="bg-background px-4 py-8 md:px-4 md:py-20 space-y-8 md:space-y-12 relative overflow-hidden"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeInUp}
+        >
+            <div className="hidden md:block from-carent-yellow to-yellow-500 pointer-events-none absolute top-80 -left-20 z-50 h-40 w-40 rounded-full bg-linear-to-tr opacity-90 blur-3xl"></div>
+            <div className="hidden md:block from-carent-yellow to-yellow-500 pointer-events-none absolute top-80 -right-20 z-50 h-40 w-40 rounded-full bg-linear-to-tr opacity-90 blur-3xl"></div>
+            {/* Gradients - hidden on mobile */}
+            <div className="max-w-xl mx-auto text-center px-2 relative z-20">
 
-            <div className="mt-40 grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
-                <div className="space-y-4">
-                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400">Phone</h4>
-                    <p className="text-sm text-[#1a1a1a] font-light tracking-wide">+44 20 1234 5678</p>
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-carent-dark">
+                    Contact Verin Tours Today
                 </div>
-                <div className="space-y-4">
-                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400">Support</h4>
-                    <p className="text-sm text-[#1a1a1a] font-light tracking-wide">support@verin.com</p>
-                </div>
-                <div className="space-y-4">
-                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400">Location</h4>
-                    <p className="text-sm text-[#1a1a1a] font-light tracking-wide">Verin Studio, London</p>
-                </div>
+
             </div>
-        </div>
+            <div className="max-w-lg mx-auto relative z-20">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                    {/* NAME FIELDS */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="relative">
+                            <Input
+                                type="text"
+                                name="firstName"
+                                required
+                                placeholder=" "
+                                label="First Name *"
+                                className="peer w-full px-3 sm:px-4 pt-5 sm:pt-6 pb-2 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-background focus:border-carent-yellow outline-none transition"
+                            />
+                        </div>
+
+                        <div className="relative">
+                            <Input
+                                type="text"
+                                name="lastName"
+                                required
+                                placeholder=" "
+                                label="Last Name *"
+                                className="peer w-full px-3 sm:px-4 pt-5 sm:pt-6 pb-2 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-background focus:border-carent-yellow outline-none transition"
+                            />
+                        </div>
+                    </div>
+
+                    {/* EMAIL */}
+                    <div className="relative">
+                        <Input
+                            type="email"
+                            name="email"
+                            required
+                            placeholder=" "
+                            label="Email Address *"
+                            className="peer w-full px-3 sm:px-4 pt-5 sm:pt-6 pb-2 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-background focus:border-carent-yellow outline-none transition"
+                        />
+                    </div>
+
+                    {/* PHONE */}
+                    <div className="relative">
+                        <Input
+                            type="tel"
+                            name="phone"
+                            required
+                            label="Phone Number *"
+                            placeholder=" "
+                            className="peer w-full px-3 sm:px-4 pt-5 sm:pt-6 pb-2 text-sm sm:text-base border-2 border-gray-200 rounded-lg bg-background focus:border-carent-yellow outline-none transition"
+                        />
+                    </div>
+
+                    {/* MESSAGE */}
+                    <div className="relative">
+                        <textarea
+                            name="message"
+                            rows={3}
+                            placeholder="Tell us about your goals"
+                            className="peer w-full text-sm sm:text-base border-2 px-3 sm:px-4 pt-3 border-gray-200 rounded-lg bg-background resize-none focus:border-carent-yellow outline-none transition"
+                            required
+                        />
+                    </div>
+
+                    <Button
+                        type="submit"
+                        className="rounded-lg w-full h-11 sm:h-12 text-sm sm:text-base text-center justify-center"
+                        disabled={isPending}
+                    >
+
+                        {isPending ? (
+                            "Sending..."
+                        ) : (
+                            <>
+                                Submit Inquiry <Send className="ml-2 w-4 h-4" />
+                            </>
+                        )}
+                    </Button>
+                </form>
+            </div>
+        </motion.section>
     );
 };

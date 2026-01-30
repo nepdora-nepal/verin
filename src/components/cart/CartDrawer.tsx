@@ -36,7 +36,7 @@ const CartDrawer: React.FC = () => {
                         <div className="p-6 border-b border-neutral-100 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <ShoppingBag className="w-5 h-5 text-neutral-900" />
-                                <h2 className="text-lg font-serif tracking-tight">Shopping Bag</h2>
+                                <h2 className="text-lg  tracking-tight">Shopping Bag</h2>
                                 <span className="text-[10px] bg-neutral-100 px-2 py-0.5 rounded-full font-medium">
                                     {cartItems.length}
                                 </span>
@@ -62,7 +62,7 @@ const CartDrawer: React.FC = () => {
                                     </div>
                                     <button
                                         onClick={() => setIsCartOpen(false)}
-                                        className="text-[11px] uppercase tracking-widest font-bold border-b border-black pb-1 hover:opacity-50 transition-opacity pt-4"
+                                        className="text-[11px]  tracking-widest font-bold border-b border-black pb-1 hover:opacity-50 transition-opacity pt-4"
                                     >
                                         Continue Shopping
                                     </button>
@@ -86,7 +86,7 @@ const CartDrawer: React.FC = () => {
                                                     </h3>
                                                     <button
                                                         onClick={() => removeFromCart(item.product.id, item.selectedVariant?.id)}
-                                                        className="text-[10px] text-neutral-400 hover:text-black uppercase tracking-tighter"
+                                                        className="text-[10px] text-neutral-400 hover:text-black  tracking-tighter"
                                                     >
                                                         Remove
                                                     </button>
@@ -96,7 +96,7 @@ const CartDrawer: React.FC = () => {
                                                         {Object.values(item.selectedVariant.option_values).join(' / ')}
                                                     </p>
                                                 )}
-                                                <p className="text-sm font-serif">
+                                                <p className="text-sm ">
                                                     $ {parseFloat(item.selectedVariant?.price || item.product.price).toFixed(2)}
                                                 </p>
                                             </div>
@@ -129,10 +129,10 @@ const CartDrawer: React.FC = () => {
                             <div className="p-6 border-t border-neutral-100 bg-[#FAFAFA] space-y-6">
                                 <div className="space-y-2">
                                     <div className="flex justify-between items-baseline">
-                                        <span className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-bold">Subtotal</span>
-                                        <span className="text-xl font-serif">$ {totalPrice.toFixed(2)} USD</span>
+                                        <span className="text-[10px]  tracking-[0.2em] text-neutral-400 font-bold">Subtotal</span>
+                                        <span className="text-xl ">$ {totalPrice.toFixed(2)} USD</span>
                                     </div>
-                                    <p className="text-[10px] text-neutral-400 uppercase tracking-widest leading-relaxed">
+                                    <p className="text-[10px] text-neutral-400  tracking-widest leading-relaxed">
                                         Shipping & taxes calculated at checkout
                                     </p>
                                 </div>
@@ -140,7 +140,7 @@ const CartDrawer: React.FC = () => {
                                 <Link
                                     href="/checkout"
                                     onClick={() => setIsCartOpen(false)}
-                                    className="w-full bg-black text-white py-5 px-8 text-[11px] uppercase tracking-[0.25em] font-bold flex items-center justify-between group hover:bg-neutral-800 transition-all shadow-lg shadow-black/5"
+                                    className="w-full bg-black text-white py-5 px-8 text-[11px]  tracking-[0.25em] font-bold flex items-center justify-between group hover:bg-neutral-800 transition-all shadow-lg shadow-black/5"
                                 >
                                     <span>Proceed to Checkout</span>
                                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

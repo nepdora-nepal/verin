@@ -39,7 +39,7 @@ export const CategoryGrid: React.FC = () => {
                 transition={{ duration: 1 }}
                 className="mb-20"
             >
-                <h2 className="text-4xl font-serif tracking-tight">Explore Collections</h2>
+                <h2 className="text-4xl  tracking-tight">Explore Collections</h2>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                 {categories.map((cat, idx) => (
@@ -61,8 +61,8 @@ export const CategoryGrid: React.FC = () => {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <h3 className="text-2xl font-serif">{cat.name}</h3>
-                                <p className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 group-hover:text-black transition-colors duration-500">
+                                <h3 className="text-2xl ">{cat.name}</h3>
+                                <p className="text-[10px]  tracking-[0.3em] text-neutral-400 group-hover:text-black transition-colors duration-500">
                                     Discover Collection
                                 </p>
                             </div>

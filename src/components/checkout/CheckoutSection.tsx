@@ -69,13 +69,13 @@ export const CheckoutSection: React.FC = () => {
     if (cartItems.length === 0) {
         return (
             <div className="pt-40 pb-20 px-8 text-center max-w-lg mx-auto min-h-screen">
-                <h1 className="text-3xl font-serif mb-6">Your bag is empty</h1>
+                <h1 className="text-3xl  mb-6">Your bag is empty</h1>
                 <p className="text-neutral-500 mb-10 leading-relaxed">
                     It seems you haven&apos;t added any luxury pieces to your collection yet.
                 </p>
                 <Link
                     href="/collections"
-                    className="inline-block bg-black text-white px-10 py-4 text-[11px] uppercase tracking-[0.25em] font-bold hover:bg-neutral-800 transition-all"
+                    className="inline-block bg-black text-white px-10 py-4 text-[11px]  tracking-[0.25em] font-bold hover:bg-neutral-800 transition-all"
                 >
                     Discover Collections
                 </Link>
@@ -90,21 +90,21 @@ export const CheckoutSection: React.FC = () => {
                 {/* Left: Checkout Form */}
                 <div className="flex-1 space-y-12">
                     <div className="space-y-4">
-                        <Link href="/" className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black transition-colors">
+                        <Link href="/" className="flex items-center gap-2 text-[10px]  tracking-widest text-neutral-400 hover:text-black transition-colors">
                             <ArrowLeft className="w-3 h-3" /> Back to store
                         </Link>
-                        <h1 className="text-4xl font-serif">Secure Checkout</h1>
+                        <h1 className="text-4xl ">Secure Checkout</h1>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-10">
                         {/* Contact Information */}
                         <section className="space-y-6">
-                            <h2 className="text-[11px] uppercase tracking-[0.2em] font-bold text-neutral-900 border-b border-neutral-100 pb-4">
+                            <h2 className="text-[11px]  tracking-[0.2em] font-bold text-neutral-900 border-b border-neutral-100 pb-4">
                                 Contact Information
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest text-neutral-500">Full Name</label>
+                                    <label className="text-[10px]  tracking-widest text-neutral-500">Full Name</label>
                                     <input
                                         required
                                         name="customer_name"
@@ -115,7 +115,7 @@ export const CheckoutSection: React.FC = () => {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest text-neutral-500">Email Address</label>
+                                    <label className="text-[10px]  tracking-widest text-neutral-500">Email Address</label>
                                     <input
                                         required
                                         type="email"
@@ -127,7 +127,7 @@ export const CheckoutSection: React.FC = () => {
                                     />
                                 </div>
                                 <div className="space-y-2 md:col-span-2">
-                                    <label className="text-[10px] uppercase tracking-widest text-neutral-500">Phone Number</label>
+                                    <label className="text-[10px]  tracking-widest text-neutral-500">Phone Number</label>
                                     <input
                                         required
                                         name="customer_phone"
@@ -142,12 +142,12 @@ export const CheckoutSection: React.FC = () => {
 
                         {/* Shipping Information */}
                         <section className="space-y-6">
-                            <h2 className="text-[11px] uppercase tracking-[0.2em] font-bold text-neutral-900 border-b border-neutral-100 pb-4">
+                            <h2 className="text-[11px]  tracking-[0.2em] font-bold text-neutral-900 border-b border-neutral-100 pb-4">
                                 Shipping Details
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2 md:col-span-2">
-                                    <label className="text-[10px] uppercase tracking-widest text-neutral-500">Shipping Address</label>
+                                    <label className="text-[10px]  tracking-widest text-neutral-500">Shipping Address</label>
                                     <input
                                         required
                                         name="customer_address"
@@ -158,7 +158,7 @@ export const CheckoutSection: React.FC = () => {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest text-neutral-500">City</label>
+                                    <label className="text-[10px]  tracking-widest text-neutral-500">City</label>
                                     <input
                                         required
                                         name="city"
@@ -169,7 +169,7 @@ export const CheckoutSection: React.FC = () => {
                                     />
                                 </div>
                                 <div className="space-y-2 md:col-span-2">
-                                    <label className="text-[10px] uppercase tracking-widest text-neutral-500">Order Note (Optional)</label>
+                                    <label className="text-[10px]  tracking-widest text-neutral-500">Order Note (Optional)</label>
                                     <textarea
                                         name="note"
                                         value={formData.note}
@@ -185,7 +185,7 @@ export const CheckoutSection: React.FC = () => {
                         <button
                             disabled={isPending}
                             type="submit"
-                            className="w-full bg-black text-white py-6 text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-800 transition-all flex items-center justify-center gap-3 disabled:bg-neutral-400"
+                            className="w-full bg-black text-white py-6 text-[11px]  tracking-[0.3em] font-bold hover:bg-neutral-800 transition-all flex items-center justify-center gap-3 disabled:bg-neutral-400"
                         >
                             {isPending ? (
                                 <>
@@ -200,7 +200,7 @@ export const CheckoutSection: React.FC = () => {
                             )}
                         </button>
 
-                        <div className="flex items-center justify-center gap-2 text-neutral-400 text-[10px] uppercase tracking-widest">
+                        <div className="flex items-center justify-center gap-2 text-neutral-400 text-[10px]  tracking-widest">
                             <ShieldCheck className="w-4 h-4" />
                             Your data is encrypted and secure
                         </div>
@@ -210,7 +210,7 @@ export const CheckoutSection: React.FC = () => {
                 {/* Right: Order Summary */}
                 <div className="lg:w-[450px]">
                     <div className="sticky top-32 bg-[#FAFAFA] border border-neutral-100 p-8 rounded-sm space-y-8">
-                        <h2 className="text-[11px] uppercase tracking-[0.2em] font-bold text-neutral-900">
+                        <h2 className="text-[11px]  tracking-[0.2em] font-bold text-neutral-900">
                             Order Summary
                         </h2>
 
@@ -236,11 +236,11 @@ export const CheckoutSection: React.FC = () => {
                                             {item.product.name}
                                         </h3>
                                         {item.selectedVariant && (
-                                            <p className="text-[10px] text-neutral-400 uppercase tracking-widest">
+                                            <p className="text-[10px] text-neutral-400  tracking-widest">
                                                 {Object.values(item.selectedVariant.option_values).join(' / ')}
                                             </p>
                                         )}
-                                        <p className="text-[13px] font-serif">
+                                        <p className="text-[13px] ">
                                             $ {parseFloat(item.selectedVariant?.price || item.product.price).toFixed(2)}
                                         </p>
                                     </div>
@@ -254,18 +254,18 @@ export const CheckoutSection: React.FC = () => {
                         <div className="space-y-4">
                             <div className="flex justify-between text-sm">
                                 <span className="text-neutral-500">Subtotal</span>
-                                <span className="font-serif">$ {totalPrice.toFixed(2)}</span>
+                                <span className="">$ {totalPrice.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between text-sm">
                                 <span className="text-neutral-500">Shipping</span>
-                                <span className="text-[10px] uppercase tracking-widest text-emerald-600 font-bold">Complimentary</span>
+                                <span className="text-[10px]  tracking-widest text-emerald-600 font-bold">Complimentary</span>
                             </div>
                             <div className="h-px bg-neutral-200 pt-4" />
                             <div className="flex justify-between items-baseline pt-2">
-                                <span className="text-[11px] uppercase tracking-[0.2em] font-bold">Total</span>
+                                <span className="text-[11px]  tracking-[0.2em] font-bold">Total</span>
                                 <div className="text-right">
-                                    <p className="text-2xl font-serif">$ {totalPrice.toFixed(2)} USD</p>
-                                    <p className="text-[9px] text-neutral-400 uppercase tracking-widest mt-1">Including duties & taxes</p>
+                                    <p className="text-2xl ">$ {totalPrice.toFixed(2)} USD</p>
+                                    <p className="text-[9px] text-neutral-400  tracking-widest mt-1">Including duties & taxes</p>
                                 </div>
                             </div>
                         </div>

@@ -34,7 +34,7 @@ export const baseSignupSchema = z
         message: "Password must contain at least one lowercase letter.",
       })
       .regex(/[A-Z]/, {
-        message: "Password must contain at least one uppercase letter.",
+        message: "Password must contain at least one  letter.",
       })
       .regex(/[0-9]/, {
         message: "Password must contain at least one number.",
@@ -46,7 +46,7 @@ export const baseSignupSchema = z
     website_type: websiteTypeEnum,
     store_name: storeNameSchema,
   })
-  .refine(data => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });

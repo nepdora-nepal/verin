@@ -14,8 +14,8 @@ const NotFound: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
                 >
-                    <span className="text-[10px] uppercase tracking-[0.5em] text-neutral-400 mb-8 block font-bold">Error 404</span>
-                    <h1 className="text-6xl md:text-8xl font-serif mb-10 leading-tight">
+                    <span className="text-[10px]  tracking-[0.5em] text-neutral-400 mb-8 block font-bold">Error 404</span>
+                    <h1 className="text-6xl md:text-8xl  mb-10 leading-tight">
                         Lost in <br /> <span className="italic font-normal">Silence</span>
                     </h1>
                     <p className="text-neutral-500 mb-12 font-light leading-relaxed tracking-wide">
@@ -24,12 +24,12 @@ const NotFound: React.FC = () => {
                     </p>
                     <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                         <Link href="/">
-                            <button className="bg-black text-white px-12 py-4 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-800 transition-all duration-500 w-full md:w-auto">
+                            <button className="bg-black text-white px-12 py-4 text-[10px]  tracking-[0.3em] font-bold hover:bg-neutral-800 transition-all duration-500 w-full md:w-auto">
                                 Return to Home
                             </button>
                         </Link>
                         <Link href="/collections">
-                            <button className="border border-black/10 text-black px-12 py-4 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-black hover:text-white transition-all duration-500 w-full md:w-auto">
+                            <button className="border border-black/10 text-black px-12 py-4 text-[10px]  tracking-[0.3em] font-bold hover:bg-black hover:text-white transition-all duration-500 w-full md:w-auto">
                                 Explore Collections
                             </button>
                         </Link>

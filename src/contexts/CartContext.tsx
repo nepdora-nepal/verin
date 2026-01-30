@@ -61,7 +61,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   useEffect(() => {
     // Load cart from localStorage on initial render
     try {
-      const storedCart = localStorage.getItem("nepdora_cart");
+      const storedCart = localStorage.getItem("verin_cart");
       if (storedCart) {
         setCartItems(JSON.parse(storedCart));
       }
@@ -74,7 +74,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   useEffect(() => {
     // Save cart to localStorage whenever it changes
     try {
-      localStorage.setItem("nepdora_cart", JSON.stringify(cartItems));
+      localStorage.setItem("verin_cart", JSON.stringify(cartItems));
     } catch (error) {
       console.error("Failed to save cart to localStorage", error);
     }

@@ -8,10 +8,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge'; // Assuming you have a Badge component
-import { ShoppingBag, Star, TrendingUp, Zap } from 'lucide-react';
+import { TrendingUp, Zap, ShoppingBag } from 'lucide-react';
+import { Product } from '@/types/product';
 import { useCart } from '@/hooks/use-cart';
 import { toast } from 'sonner';
-import { Product } from '@/types/product';
 
 interface ProductGridProps {
     title?: string;
@@ -37,7 +37,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         is_popular: isPopular
     });
 
-    const { addToCart } = useCart();
+    const { addToCart, setIsCartOpen } = useCart();
 
     const products: Product[] = productsData?.results || [];
 
@@ -45,12 +45,15 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         e.preventDefault();
         e.stopPropagation();
 
+        if (!product || !product.id) return;
+
         if (product.stock === 0) {
             toast.error("Product is out of stock");
             return;
         }
-
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
         addToCart(product as any, 1);
+        setIsCartOpen(true);
         toast.success(`${product.name} added to cart`);
     };
 
@@ -90,7 +93,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
     );
 
     const ProductCard = ({ product, index }: { product: Product; index: number }) => {
-        const discount = calculateDiscount(product.price, product.market_price);
+        const discount = calculateDiscount(product.price, product.market_price || product.price);
         const hasDiscount = discount > 0;
         const isLowStock = product.stock < 50;
         const isOutOfStock = product.stock === 0;
@@ -103,8 +106,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group relative"
             >
-                <Link href={`/product/${product.slug}`} className="block">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 mb-4">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 mb-4 cursor-pointer">
+                    <Link href={`/product/${product.slug}`} className="block h-full w-full">
                         <Image
                             src={getImageUrl(product.thumbnail_image ?? '/placeholder-product.jpg')}
                             alt={product.name}
@@ -143,83 +146,67 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                             </div>
                         )}
 
-                        {/* Add to Cart Overlay */}
-                        {!isOutOfStock && (
-                            <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                                <button
-                                    onClick={(e) => handleAddToCart(e, product)}
-                                    className="w-full bg-white text-black py-3 text-[10px] uppercase tracking-[0.2em] font-bold flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors shadow-lg"
-                                >
-                                    <ShoppingBag className="w-4 h-4" />
-                                    Add to Cart
-                                </button>
-                            </div>
-                        )}
-
                         {/* Overlay on hover */}
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
-                    </div>
+                    </Link>
 
-                    <div className="space-y-2">
-                        {/* Category */}
-                        {product.category && (
-                            <p className="text-xs text-gray-500 uppercase tracking-wider">
-                                {product.category.name}
-                            </p>
-                        )}
-
-                        {/* Product name */}
-                        <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors line-clamp-2 h-10">
-                            {product.name}
-                        </h3>
-
-                        {/* Price section */}
-                        <div className="flex items-center gap-2">
-                            <span className="text-lg font-semibold text-gray-900">
-                                {formatPrice(product.price)}
-                            </span>
-                            {hasDiscount && (
-                                <span className="text-sm text-gray-500 line-through">
-                                    {formatPrice(product.market_price)}
-                                </span>
-                            )}
+                    {/* Add to Cart Overlay - Outside of Link but absolute to the same container */}
+                    {!isOutOfStock && (
+                        <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-10">
+                            <button
+                                type="button"
+                                onClick={(e) => handleAddToCart(e, product)}
+                                className="w-full bg-white text-black py-3 text-[10px]  tracking-[0.2em] font-bold flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors shadow-lg pointer-events-auto"
+                            >
+                                <ShoppingBag className="w-4 h-4" />
+                                Add to Cart
+                            </button>
                         </div>
+                    )}
+                </div>
 
-                        {/* Rating and reviews */}
-                        {product.average_rating && product.average_rating > 0 && (
-                            <div className="flex items-center gap-2">
-                                <div className="flex items-center">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star
-                                            key={i}
-                                            className={`w-4 h-4 ${i < Math.floor(product.average_rating || 0)
-                                                ? 'text-amber-500 fill-amber-500'
-                                                : 'text-gray-300'
-                                                }`}
-                                        />
-                                    ))}
-                                </div>
-                                <span className="text-xs text-gray-500">
-                                    ({product.reviews_count})
-                                </span>
-                            </div>
-                        )}
+                <Link href={`/product/${product.slug}`} className="block space-y-2">
+                    {/* Category */}
+                    {product.category && (
+                        <p className="text-xs text-gray-500  tracking-wider">
+                            {product.category.name}
+                        </p>
+                    )}
 
-                        {/* Stock indicator */}
-                        {isLowStock && !isOutOfStock && (
-                            <p className="text-xs text-amber-600 font-medium">
-                                Only {product.stock} left in stock
-                            </p>
-                        )}
+                    {/* Product name */}
+                    <h3 className="font-medium text-gray-900 group-hover:text-gray-700 transition-colors line-clamp-2 h-10">
+                        {product.name}
+                    </h3>
 
-                        {/* Fast shipping badge */}
-                        {product.fast_shipping && (
-                            <div className="flex items-center gap-1 text-xs text-blue-600">
-                                <Zap className="w-3 h-3" />
-                                Fast shipping available
-                            </div>
+                    {/* Price section */}
+                    <div className="flex items-center gap-2">
+                        <span className="text-lg font-semibold text-gray-900">
+                            {formatPrice(product.price)}
+                        </span>
+                        {hasDiscount && (
+                            <span className="text-sm text-gray-500 line-through">
+                                {formatPrice(product.market_price || product.price)}
+                            </span>
                         )}
                     </div>
+
+                    {/* Rating and reviews */}
+
+
+                    {/* Stock indicator */}
+                    {isLowStock && !isOutOfStock && (
+                        <p className="text-xs text-amber-600 font-medium">
+                            Only {product.stock} left in stock
+                        </p>
+                    )}
+
+                    {/* Fast shipping badge */}
+                    {product.fast_shipping && (
+                        <div className="flex items-center gap-1 text-xs text-blue-600">
+                            <Zap className="w-3 h-3" />
+                            Fast shipping available
+                        </div>
+                    )}
                 </Link>
             </motion.div>
         );
@@ -259,7 +246,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                         className="text-center mb-12"
                     >
                         {title && (
-                            <h2 className="text-3xl font-serif md:text-4xl  text-gray-900 mb-4">
+                            <h2 className="text-3xl  md:text-4xl  text-gray-900 mb-4">
                                 {title}
                             </h2>
                         )}

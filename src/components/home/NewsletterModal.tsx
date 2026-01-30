@@ -73,8 +73,8 @@ export const NewsletterModal: React.FC = () => {
                     </div>
 
                     <div className="w-full md:w-1/2 p-12 flex flex-col justify-center text-center">
-                        <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 mb-6 block font-bold">Welcome Offer</span>
-                        <h2 className="text-4xl font-serif mb-6 leading-tight">Sign up and get 20% off your first order</h2>
+                        <span className="text-[10px]  tracking-[0.3em] text-neutral-400 mb-6 block font-bold">Welcome Offer</span>
+                        <h2 className="text-4xl  mb-6 leading-tight">Sign up and get 20% off your first order</h2>
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <input
                                 type="email"
@@ -88,12 +88,12 @@ export const NewsletterModal: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={isPending}
-                                className="w-full bg-black text-white py-4 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-neutral-800 transition-colors disabled:bg-neutral-400"
+                                className="w-full bg-black text-white py-4 text-[10px]  tracking-[0.2em] font-bold hover:bg-neutral-800 transition-colors disabled:bg-neutral-400"
                             >
                                 {isPending ? 'Subscribing...' : 'Subscribe'}
                             </button>
                         </form>
-                        <p className="text-[9px] uppercase tracking-[0.2em] text-neutral-400 mt-8">
+                        <p className="text-[9px]  tracking-[0.2em] text-neutral-400 mt-8">
                             By subscribing you agree to our Terms & Conditions
                         </p>
                     </div>

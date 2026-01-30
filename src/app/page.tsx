@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Hero } from '@/components/home/Hero';
+import Hero from '@/components/home/Hero';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import Link from 'next/link';
 import ImageWithFallback from '@/components/common/ImageWithFallback';
@@ -13,7 +13,7 @@ import { TestimonialSection } from '@/components/home/TestimonialSection';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 import { PopularProducts } from '@/components/home/PopularProducts';
 import { FAQSection } from '@/components/faq/FAQSection';
-import { ContactSection } from '@/components/contact/ContactSection';
+import ContactSection from '@/components/contact/ContactSection';
 
 const HomePage: React.FC = () => {
   return (
@@ -53,17 +53,17 @@ const HomePage: React.FC = () => {
           transition={{ duration: 1 }}
           className="relative z-10 text-center text-white px-6"
         >
-          <h2 className="text-6xl md:text-8xl font-serif mb-10 leading-[1.1]">
+          <h2 className="text-6xl md:text-8xl  mb-10 leading-[1.1]">
             Dressed in Time, <br /> <span className="italic font-normal">Not Trends</span>
           </h2>
           <div className="flex justify-center space-x-6">
             <Link href="/collections">
-              <button className="bg-white text-black px-12 py-4 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-200 transition-colors">
+              <button className="bg-white text-black px-12 py-4 text-[10px]  tracking-[0.3em] font-bold hover:bg-neutral-200 transition-colors">
                 Explore Collection
               </button>
             </Link>
             <Link href="/contact">
-              <button className="border border-white text-white px-12 py-4 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-white hover:text-black transition-colors">
+              <button className="border border-white text-white px-12 py-4 text-[10px]  tracking-[0.3em] font-bold hover:bg-white hover:text-black transition-colors">
                 Contact Us
               </button>
             </Link>

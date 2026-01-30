@@ -36,7 +36,7 @@ export const FAQSection: React.FC = () => {
                 viewport={{ once: true }}
                 className="text-center mb-20"
             >
-                <h2 className="text-5xl font-serif">Frequently Asked Questions</h2>
+                <h2 className="text-5xl ">Frequently Asked Questions</h2>
             </motion.div>
 
             <Accordion type="single" collapsible className="w-full space-y-4">

@@ -20,7 +20,7 @@ export const AboutSection: React.FC = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    className="text-[6rem] md:text-[9rem] font-serif mb-16 leading-[1] tracking-tight"
+                    className="text-[6rem] md:text-[9rem]  mb-16 leading-[1] tracking-tight"
                 >
                     Simplicity is <br /> <span className="italic font-normal">our statement.</span>
                 </motion.h1>
@@ -45,7 +45,7 @@ export const AboutSection: React.FC = () => {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    className="text-[11px] font-medium text-neutral-400 leading-relaxed uppercase tracking-[0.4em] max-w-3xl mx-auto"
+                    className="text-[11px] font-medium text-neutral-400 leading-relaxed  tracking-[0.4em] max-w-3xl mx-auto"
                 >
                     Inspired by classic tailoring and contemporary culture, we create pieces defined by quiet complexity, with a sense of understated sophistication.
                 </motion.p>
@@ -55,7 +55,7 @@ export const AboutSection: React.FC = () => {
                 <motion.h2
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    className="text-4xl font-serif mb-32 text-center"
+                    className="text-4xl  mb-32 text-center"
                 >
                     Our Journey in Craft
                 </motion.h2>
@@ -82,7 +82,7 @@ export const AboutSection: React.FC = () => {
                             >
                                 <div className={`md:w-5/12 ${idx % 2 === 0 ? 'md:text-right md:pr-16' : 'md:text-left md:pl-16'}`}>
                                     <span className="text-[11px] font-bold tracking-[0.4em] mb-4 block text-neutral-300">{item.year}</span>
-                                    <h3 className="text-2xl font-serif mb-6">{item.title}</h3>
+                                    <h3 className="text-2xl  mb-6">{item.title}</h3>
                                     <p className="text-sm text-neutral-500 font-light leading-relaxed tracking-wide">
                                         {item.desc}
                                     </p>

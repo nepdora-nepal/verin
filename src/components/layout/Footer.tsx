@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-40">
                     <div className="md:col-span-3 grid grid-cols-2 gap-8">
                         <div className="space-y-6">
-                            <h4 className="text-[9px] uppercase tracking-[0.4em] text-neutral-500 font-bold">Collections</h4>
+                            <h4 className="text-[9px]  tracking-[0.4em] text-neutral-500 font-bold">Collections</h4>
                             <ul className="space-y-4 text-[13px] font-light text-neutral-400">
                                 <li><Link href="/collections" className="hover:text-white transition-colors">All Collections</Link></li>
                                 <li><Link href="/collections" className="hover:text-white transition-colors">Lookbook</Link></li>
@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
                             </ul>
                         </div>
                         <div className="space-y-6">
-                            <h4 className="text-[9px] uppercase tracking-[0.4em] text-neutral-500 font-bold">Company</h4>
+                            <h4 className="text-[9px]  tracking-[0.4em] text-neutral-500 font-bold">Company</h4>
                             <ul className="space-y-4 text-[13px] font-light text-neutral-400">
                                 <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
                                 <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
 
                     <div className="md:col-span-3 grid grid-cols-2 gap-8">
                         <div className="space-y-6">
-                            <h4 className="text-[9px] uppercase tracking-[0.4em] text-neutral-500 font-bold">Legal</h4>
+                            <h4 className="text-[9px]  tracking-[0.4em] text-neutral-500 font-bold">Legal</h4>
                             <ul className="space-y-4 text-[13px] font-light text-neutral-400">
                                 <li><Link href="/" className="hover:text-white transition-colors">Privacy Policy</Link></li>
                                 <li><Link href="/" className="hover:text-white transition-colors">Terms of Use</Link></li>
@@ -68,7 +68,7 @@ export const Footer: React.FC = () => {
 
                     <div className="md:col-span-6 space-y-10">
                         <div>
-                            <h4 className="text-[28px] font-serif mb-4 leading-tight">Stay in the loop</h4>
+                            <h4 className="text-[28px]  mb-4 leading-tight">Stay in the loop</h4>
                             <p className="text-[13px] font-light text-neutral-400 max-w-sm mb-10 leading-relaxed">
                                 Get the latest updates, tips, and releases — straight to your inbox.
                             </p>
@@ -85,12 +85,12 @@ export const Footer: React.FC = () => {
                                 <button
                                     type="submit"
                                     disabled={isPending}
-                                    className="bg-white text-black px-10 py-3 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-200 transition-colors disabled:bg-neutral-400"
+                                    className="bg-white text-black px-10 py-3 text-[10px]  tracking-[0.3em] font-bold hover:bg-neutral-200 transition-colors disabled:bg-neutral-400"
                                 >
                                     {isPending ? 'Submitting...' : 'Submit'}
                                 </button>
                             </form>
-                            <p className="text-[9px] uppercase tracking-[0.3em] text-neutral-600 mt-6 font-bold">
+                            <p className="text-[9px]  tracking-[0.3em] text-neutral-600 mt-6 font-bold">
                                 NO SPAM. JUST QUALITY CONTENT AND OCCASIONAL UPDATES.
                             </p>
                         </div>
@@ -98,7 +98,7 @@ export const Footer: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col md:flex-row justify-between items-end border-t border-white/5 pt-16">
-                    <div className="text-[11px] text-neutral-500 tracking-[0.2em] uppercase space-y-2">
+                    <div className="text-[11px] text-neutral-500 tracking-[0.2em]  space-y-2">
                         <div>Verin<sup>®</sup>. All rights reserved. © 2026</div>
                     </div>
 
@@ -109,7 +109,7 @@ export const Footer: React.FC = () => {
                     whileInView={{ opacity: 0.8, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="text-[30vw] font-serif leading-[0.8] tracking-[-0.05em] text-white pointer-events-none mt-32 text-center select-none"
+                    className="text-[30vw]  leading-[0.8] tracking-[-0.05em] text-white pointer-events-none mt-32 text-center select-none"
                 >
                     VERIN<sup>®</sup>
                 </motion.div>

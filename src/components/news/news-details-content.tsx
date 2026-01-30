@@ -17,12 +17,12 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({ blog }) => {
         <article className="max-w-5xl mx-auto px-10">
             {/* Breadcrumbs & Category */}
             <div className="flex items-center justify-between mb-16">
-                <div className="flex items-center space-x-2 text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-400">
+                <div className="flex items-center space-x-2 text-[10px]  tracking-[0.2em] font-bold text-neutral-400">
                     <Link href="/news" className="hover:text-black transition-colors">News</Link>
                     <ChevronRight className="w-3 h-3" />
                     <span className="text-neutral-600">{blog.title}</span>
                 </div>
-                <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400">
+                <div className="text-[10px]  tracking-[0.3em] font-bold text-neutral-400">
                     {blog.tags?.[0]?.name || 'Collections & Campaigns'}
                 </div>
             </div>
@@ -32,7 +32,7 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({ blog }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="text-7xl md:text-8xl font-serif mb-16 tracking-tight leading-[1.1]"
+                className="text-7xl md:text-8xl  mb-16 tracking-tight leading-[1.1]"
             >
                 {blog.title}
             </motion.h1>
@@ -65,22 +65,22 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({ blog }) => {
                         />
                     </div>
                     <div>
-                        <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold">
+                        <h4 className="text-[10px]  tracking-[0.2em] font-bold">
                             {blog.author ? `${blog.author.first_name} ${blog.author.last_name}` : 'Fashion Editor'}
                         </h4>
-                        <p className="text-[10px] uppercase tracking-[0.1em] text-neutral-400">Sofia Maren</p>
+                        <p className="text-[10px]  tracking-[0.1em] text-neutral-400">Sofia Maren</p>
                     </div>
                 </div>
                 <div className="flex items-center space-x-12">
                     <div className="flex items-center space-x-2">
                         <Calendar className="w-3 h-3 text-neutral-300" />
-                        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-500">
+                        <span className="text-[10px]  tracking-[0.2em] font-bold text-neutral-500">
                             {new Date(blog.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                         </span>
                     </div>
                     <div className="flex items-center space-x-2">
                         <Clock className="w-3 h-3 text-neutral-300" />
-                        <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-neutral-500">
+                        <span className="text-[10px]  tracking-[0.2em] font-bold text-neutral-500">
                             {blog.time_to_read || '7 min'} read
                         </span>
                     </div>
@@ -92,7 +92,7 @@ const BlogDetailContent: React.FC<BlogDetailContentProps> = ({ blog }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 1 }}
-                className="prose prose-neutral max-w-none prose-h2:font-serif prose-h2:text-4xl prose-h2:tracking-tight prose-p:text-lg prose-p:font-light prose-p:leading-relaxed prose-p:opacity-80 blog-content-rich"
+                className="prose prose-neutral max-w-none prose-h2: prose-h2:text-4xl prose-h2:tracking-tight prose-p:text-lg prose-p:font-light prose-p:leading-relaxed prose-p:opacity-80 blog-content-rich"
                 dangerouslySetInnerHTML={{ __html: blog.content }}
             />
         </article>

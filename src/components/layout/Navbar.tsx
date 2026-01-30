@@ -40,13 +40,13 @@ export const Navbar: React.FC = () => {
                 {/* Logo */}
                 <Link
                     href="/"
-                    className="text-2xl font-serif tracking-[0.1em] font-medium transition-opacity hover:opacity-70"
+                    className="text-2xl  tracking-[0.1em] font-medium transition-opacity hover:opacity-70"
                 >
                     VERIN<sup>®</sup>
                 </Link>
 
                 {/* Desktop Menu */}
-                <div className="hidden lg:flex items-center space-x-12 text-[10px] uppercase tracking-[0.3em] font-medium">
+                <div className="hidden lg:flex items-center space-x-12 text-[10px]  tracking-[0.3em] font-medium">
                     {["Home", "About", "Collections", "News", "Contact"].map((item) => (
                         <Link
                             key={item}
